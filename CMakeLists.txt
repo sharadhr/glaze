@@ -18,18 +18,30 @@ endif()
 add_library(glaze_glaze INTERFACE)
 add_library(glaze::glaze ALIAS glaze_glaze)
 
+include(CMakeDependentOption)
+# This magic target is only defined when the entire toolchain supports import std.
+# See: https://cmake.org/cmake/help/latest/manual/cmake-cxxmodules.7.html#toolchain-import-std
+cmake_dependent_option(glaze_ENABLE_MODULE "Enable the C++20 module for Glaze" ON [[TARGET __CMAKE::CXX23]] OFF)
+
+if(glaze_ENABLE_MODULE)
+  add_library(glaze_module)
+  set_target_properties(glaze_module PROPERTIES
+    CXX_MODULE_STD ON
+  )
+  target_link_libraries(glaze_module PUBLIC glaze::glaze)
+endif(glaze_ENABLE_MODULE)
 
 if (MSVC)
   string(REGEX MATCH "\/cl(.exe)?$" matched_cl ${CMAKE_CXX_COMPILER})
   if (matched_cl)
     # for a C++ standards compliant preprocessor, not needed for clang-cl
     target_compile_options(glaze_glaze INTERFACE "/Zc:preprocessor" /permissive- /Zc:lambda)
-    
+
     if(PROJECT_IS_TOP_LEVEL)
-      target_compile_options(glaze_glaze INTERFACE 
+      target_compile_options(glaze_glaze INTERFACE
         $<$<CONFIG:Release>:/GL>
         $<$<CONFIG:MinSizeRel>:/GL>)
-      target_link_options(glaze_glaze INTERFACE 
+      target_link_options(glaze_glaze INTERFACE
         $<$<CONFIG:Release>:/LTCG /INCREMENTAL:NO>
         $<$<CONFIG:MinSizeRel>:/LTCG /INCREMENTAL:NO>)
     endif()
@@ -101,3 +113,9 @@ if(glaze_ENABLE_SSL)
   target_compile_definitions(glaze_glaze INTERFACE GLZ_ENABLE_SSL)
 endif(glaze_ENABLE_SSL)
 
+if(glaze_ENABLE_MODULE)
+  target_sources(glaze_module PUBLIC FILE_SET CXX_MODULES
+    BASE_DIRS ${PROJECT_SOURCE_DIR}/include
+    FILES ${PROJECT_SOURCE_DIR}/include/glaze/glaze.cppm
+  )
+endif(glaze_ENABLE_MODULE)
