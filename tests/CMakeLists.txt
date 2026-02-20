@@ -116,6 +116,13 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(glz_test_exceptions INTERFACE /W4 /wd4459 /wd4805)
 endif()
 
+if(glaze_ENABLE_CXX_MODULE)
+    target_compile_definitions(glz_test_common INTERFACE GLAZE_USE_CXX_MODULE)
+    target_compile_definitions(glz_test_exceptions INTERFACE GLAZE_USE_CXX_MODULE)
+    target_link_libraries(glz_test_common INTERFACE glaze::cxx_module)
+    target_link_libraries(glz_test_exceptions INTERFACE glaze::cxx_module)
+endif(glaze_ENABLE_CXX_MODULE)
+
 add_subdirectory(api_test)
 add_subdirectory(beve_test)
 add_subdirectory(cbor_test)
