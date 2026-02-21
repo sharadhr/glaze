@@ -3,12 +3,17 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <functional>
+#endif
 
 #include "glaze/core/common.hpp"
 #include "glaze/core/reflect.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    struct equal_to final
    {

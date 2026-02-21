@@ -3,10 +3,16 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/core/common.hpp"
 #include "glaze/core/reflect.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Test that two meta objects are equal, with epsilon support for floating point values
    struct approx_equal_to final
