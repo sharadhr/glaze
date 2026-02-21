@@ -3,6 +3,10 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <algorithm>
 #include <compare>
 #include <cstddef>
@@ -15,6 +19,7 @@
 #include <stdexcept>
 #include <type_traits>
 #include <utility>
+#endif
 
 #ifndef GLZ_THROW_OR_ABORT
 #if __cpp_exceptions
@@ -425,14 +430,14 @@ namespace glz
    }
 
    // Non-member functions
-   template <class T, size_t N>
+   GLAZE_EXPORT template <class T, size_t N>
    constexpr void swap(detail::inplace_vector::inplace_vector_base<T, N>& x,
                        detail::inplace_vector::inplace_vector_base<T, N>& y) noexcept(noexcept(x.swap(y)))
    {
       x.swap(y);
    }
 
-   template <class T, size_t N, class U>
+   GLAZE_EXPORT template <class T, size_t N, class U>
    constexpr typename detail::inplace_vector::inplace_vector_base<T, N>::size_type erase(
       detail::inplace_vector::inplace_vector_base<T, N>& c, const U& value)
    {
@@ -442,7 +447,7 @@ namespace glz
       return r;
    }
 
-   template <class T, size_t N, class Predicate>
+   GLAZE_EXPORT template <class T, size_t N, class Predicate>
    constexpr typename detail::inplace_vector::inplace_vector_base<T, N>::size_type erase_if(
       detail::inplace_vector::inplace_vector_base<T, N>& c, Predicate pred)
    {
@@ -452,7 +457,7 @@ namespace glz
       return r;
    }
 
-   template <class T, size_t N>
+   GLAZE_EXPORT template <class T, size_t N>
    class inplace_vector : public detail::inplace_vector::inplace_vector_base<T, N>
    {
      public:
@@ -981,7 +986,7 @@ namespace glz
       }
    };
 
-   namespace freestanding
+   GLAZE_EXPORT namespace freestanding
    {
       template <class T, size_t N>
       class inplace_vector : public detail::inplace_vector::inplace_vector_base<T, N>
