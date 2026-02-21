@@ -3,13 +3,23 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#define GLAZE_EXPORT_OPEN GLAZE_EXPORT {
+#define GLAZE_EXPORT_CLOSE }
+#else
+#define GLAZE_EXPORT
+#define GLAZE_EXPORT_OPEN
+#define GLAZE_EXPORT_CLOSE
+#include <unordered_map>
+#include <utility>
+#endif
+
 #include <glaze/glaze.hpp>
 #include <glaze/tuplet/tuple.hpp>
 #include <glaze/util/expected.hpp>
-#include <unordered_map>
-#include <utility>
 
-namespace glz::rpc
+GLAZE_EXPORT namespace glz::rpc
 {
    enum struct error_e : int {
       no_error = 0,
@@ -48,6 +58,7 @@ namespace glz::rpc
 // jsonrpc
 namespace glz::rpc
 {
+   GLAZE_EXPORT_OPEN
    using id_t = std::variant<glz::generic::null_t, std::string_view, std::int64_t>;
    inline constexpr std::string_view supported_version{"2.0"};
 
@@ -192,6 +203,8 @@ namespace glz::rpc
       std::unordered_map<id_t, callback_t> pending_requests;
    };
 
+   GLAZE_EXPORT_CLOSE
+
    namespace detail
    {
       template <string_literal name, class... Method>
@@ -276,6 +289,7 @@ namespace glz::rpc
       }
    }
 
+   GLAZE_EXPORT_OPEN
    template <concepts::method_type... Method>
    struct server
    {
@@ -534,4 +548,6 @@ namespace glz::rpc
          return detail::get_request_map<request_map_t, Name>(methods);
       }
    };
+
+   GLAZE_EXPORT_CLOSE
 } // namespace glz::rpc

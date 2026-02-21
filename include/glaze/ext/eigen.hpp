@@ -3,6 +3,10 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #if __has_include(<Eigen/Core>)
 #include <Eigen/Core>
 #else
@@ -10,6 +14,7 @@ static_assert(false, "Eigen must be included to use glaze/ext/eigen.hpp");
 #endif
 
 #include <span>
+#endif
 
 #include "glaze/api/std/array.hpp"
 #include "glaze/beve/read.hpp"
@@ -22,7 +27,7 @@ static_assert(false, "Eigen must be included to use glaze/ext/eigen.hpp");
 #include "glaze/json/read.hpp"
 #include "glaze/json/write.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <matrix_t T>
       requires(T::RowsAtCompileTime >= 0 && T::ColsAtCompileTime >= 0)
@@ -359,7 +364,7 @@ namespace glz
    };
 }
 
-template <class Scalar, int Rows, int Cols>
+GLAZE_EXPORT template <class Scalar, int Rows, int Cols>
 struct glz::meta<Eigen::Matrix<Scalar, Rows, Cols>>
 {
    static constexpr std::string_view name = join_v<chars<"Eigen::Matrix<">, name_v<Scalar>, chars<",">, //

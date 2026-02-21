@@ -3,8 +3,13 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <atomic>
 #include <cstdio>
+#endif
 
 #include "glaze/glaze.hpp"
 
@@ -16,7 +21,7 @@
 namespace glz
 {
    // To support bool and std::atomic<bool> and other custom boolean types
-   template <class T>
+   GLAZE_EXPORT template <class T>
    concept cli_menu_boolean = requires(T t) {
       { t } -> std::convertible_to<bool>;
    };
@@ -55,7 +60,7 @@ namespace glz
    // When running with exceptions enabled we allow the user to provide an exceptions callback, which will be invoked
    // when an exception is thrown from running a menu item. The exception callback must take a `const std::exception&`
 
-   template <auto Opts = opts{.prettify = true}, class T, cli_menu_boolean ShowMenu = std::atomic<bool>>
+   GLAZE_EXPORT template <auto Opts = opts{.prettify = true}, class T, cli_menu_boolean ShowMenu = std::atomic<bool>>
       requires(glaze_object_t<T> || reflectable<T>)
 #if __cpp_exceptions
    inline void run_cli_menu(T& value, ShowMenu&& show_menu, auto&& exception_callback)
@@ -341,7 +346,7 @@ namespace glz
 
 #if __cpp_exceptions
    // Version without exception callback for platforms with exceptions enabled
-   template <auto Opts = opts{.prettify = true}, class T, cli_menu_boolean ShowMenu = std::atomic<bool>>
+   GLAZE_EXPORT template <auto Opts = opts{.prettify = true}, class T, cli_menu_boolean ShowMenu = std::atomic<bool>>
       requires(glaze_object_t<T> || reflectable<T>)
    inline void run_cli_menu(T& value, ShowMenu&& show_menu = true)
    {

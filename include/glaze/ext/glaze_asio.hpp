@@ -3,6 +3,10 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #if __has_include(<asio.hpp>) && !defined(GLZ_USE_BOOST_ASIO)
 #include <asio.hpp>
 #include <asio/signal_set.hpp>
@@ -26,13 +30,14 @@ static_assert(false, "standalone or boost asio must be included to use glaze/ext
 #include <coroutine>
 #include <iostream>
 #include <span>
+#endif
 
 #include "glaze/rpc/registry.hpp"
 #include "glaze/rpc/repe/buffer.hpp"
 #include "glaze/util/buffer_pool.hpp"
 #include "glaze/util/memory_pool.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
 #if defined(GLZ_USING_BOOST_ASIO)
    namespace asio
