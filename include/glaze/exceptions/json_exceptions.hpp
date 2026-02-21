@@ -5,11 +5,17 @@
 
 #if __cpp_exceptions
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/exceptions/core_exceptions.hpp"
 #include "glaze/exceptions/json_schema_exceptions.hpp"
 #include "glaze/glaze.hpp"
 
-namespace glz::ex
+GLAZE_EXPORT namespace glz::ex
 {
    template <class Buffer>
    void validate_json(Buffer&& buffer)
@@ -123,7 +129,7 @@ namespace glz::ex
    }
 }
 
-namespace glz::ex
+GLAZE_EXPORT namespace glz::ex
 {
    template <class T, class Buffer>
    void write_json(T&& value, Buffer&& buffer)

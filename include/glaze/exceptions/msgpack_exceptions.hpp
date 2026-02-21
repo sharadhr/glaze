@@ -5,10 +5,16 @@
 
 #if __cpp_exceptions
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/exceptions/core_exceptions.hpp"
 #include "glaze/msgpack.hpp"
 
-namespace glz::ex
+GLAZE_EXPORT namespace glz::ex
 {
    template <class T, class Buffer>
    void read_msgpack(T& value, Buffer&& buffer)
@@ -42,7 +48,7 @@ namespace glz::ex
    }
 }
 
-namespace glz::ex
+GLAZE_EXPORT namespace glz::ex
 {
    template <class T, class Buffer>
    void write_msgpack(T&& value, Buffer&& buffer)

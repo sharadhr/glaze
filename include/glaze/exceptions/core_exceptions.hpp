@@ -5,10 +5,16 @@
 
 #if __cpp_exceptions
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/core/read.hpp"
 #include "glaze/core/write.hpp"
 
-namespace glz::ex
+GLAZE_EXPORT namespace glz::ex
 {
    template <auto Opts, class T>
       requires read_supported<T, Opts.format>
@@ -21,7 +27,7 @@ namespace glz::ex
    }
 }
 
-namespace glz::ex
+GLAZE_EXPORT namespace glz::ex
 {
    // For writing to a std::string, std::vector<char>, std::deque<char> and the like
    template <auto Opts, class T, output_buffer Buffer>

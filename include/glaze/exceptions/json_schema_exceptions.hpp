@@ -5,10 +5,16 @@
 
 #if __cpp_exceptions
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/exceptions/core_exceptions.hpp"
 #include "glaze/json/schema.hpp"
 
-namespace glz::ex
+GLAZE_EXPORT namespace glz::ex
 {
    template <class T, auto Opts = opts{}, class Buffer>
    void write_json_schema(Buffer&& buffer)
