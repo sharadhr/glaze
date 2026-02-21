@@ -3,6 +3,10 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <filesystem>
 #include <map>
 #include <string_view>
@@ -34,8 +38,9 @@
 #define SHARED_LIBRARY_EXTENSION ".so"
 #define SHARED_LIBRARY_PREFIX "lib"
 #endif
+#endif
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
 #ifdef GLAZE_API_ON_WINDOWS
    using lib_t = HINSTANCE;

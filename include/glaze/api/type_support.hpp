@@ -3,8 +3,13 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <cstdint>
 #include <string_view>
+#endif
 
 #include "glaze/core/meta.hpp"
 #include "glaze/util/for_each.hpp"
@@ -12,7 +17,7 @@
 namespace glz
 {
 #define specialize(type)                              \
-   template <>                                        \
+   GLAZE_EXPORT template <>                           \
    struct meta<type>                                  \
    {                                                  \
       static constexpr std::string_view name = #type; \
@@ -23,7 +28,7 @@ namespace glz
          specialize(int64_t) specialize(uint64_t) specialize(float) specialize(double)
 #undef specialize
 
-            template <std::same_as<long long> long_long_t>
+   GLAZE_EXPORT template <std::same_as<long long> long_long_t>
       requires requires { !std::same_as<long long, int64_t>; }
    struct meta<long_long_t>
    {
@@ -32,7 +37,7 @@ namespace glz
    };
    static_assert(glz::name_v<int64_t> == glz::name_v<long long>);
 
-   template <std::same_as<unsigned long long> unsigned_long_long_t>
+   GLAZE_EXPORT template <std::same_as<unsigned long long> unsigned_long_long_t>
       requires requires { !std::same_as<unsigned long long, uint64_t>; }
    struct meta<unsigned_long_long_t>
    {
@@ -41,7 +46,7 @@ namespace glz
    };
    static_assert(glz::name_v<uint64_t> == glz::name_v<unsigned long long>);
 
-   template <class T>
+   GLAZE_EXPORT template <class T>
       requires(std::is_lvalue_reference_v<T>)
    struct meta<T>
    {
@@ -49,7 +54,7 @@ namespace glz
       static constexpr std::string_view name = join_v<name_v<V>, chars<"&">>;
    };
 
-   template <class T>
+   GLAZE_EXPORT template <class T>
       requires(std::is_rvalue_reference_v<T>)
    struct meta<T>
    {
@@ -57,7 +62,7 @@ namespace glz
       static constexpr std::string_view name = join_v<name_v<V>, chars<"&&">>;
    };
 
-   template <class T>
+   GLAZE_EXPORT template <class T>
       requires(std::is_const_v<T>)
    struct meta<T>
    {
@@ -65,7 +70,7 @@ namespace glz
       static constexpr std::string_view name = join_v<chars<"const ">, name_v<V>>;
    };
 
-   template <class T>
+   GLAZE_EXPORT template <class T>
       requires(std::is_pointer_v<T>)
    struct meta<T>
    {
@@ -73,7 +78,7 @@ namespace glz
       static constexpr std::string_view name = join_v<name_v<V>, chars<"*">>;
    };
 
-   template <class Ret, class Obj, class... Args>
+   GLAZE_EXPORT template <class Ret, class Obj, class... Args>
    struct meta<Ret (Obj::*)(Args...)>
    {
       static constexpr std::string_view name =

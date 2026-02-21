@@ -3,11 +3,16 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <unordered_map>
 
 #include "glaze/core/meta.hpp"
+#endif
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <class Key, class Mapped>
    struct meta<std::unordered_map<Key, Mapped>>

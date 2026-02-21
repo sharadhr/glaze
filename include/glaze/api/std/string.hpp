@@ -3,12 +3,17 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <string>
 #include <string_view>
 
 #include "glaze/core/meta.hpp"
+#endif
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <>
    struct meta<std::string>
