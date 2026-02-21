@@ -3,11 +3,17 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/core/write.hpp"
 #include "glaze/util/dtoa.hpp"
 #include "glaze/util/itoa.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <num_t T>
    void format_to(std::string& buffer, T&& value)

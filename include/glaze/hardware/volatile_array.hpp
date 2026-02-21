@@ -5,11 +5,16 @@
 
 // A matching std::array API for volatile data
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <cstddef>
 #include <initializer_list>
 #include <type_traits>
+#endif
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <class T>
    concept is_volatile_array = requires { std::decay_t<T>::glaze_volatile_array; };
