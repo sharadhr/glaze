@@ -3,12 +3,17 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <concepts>
 #include <cstdint>
 #include <ranges>
 #include <utility>
 #include <vector>
 #include <version>
+#endif
 
 // Over time we want most concepts to use the nomenclature:
 // is_
@@ -16,7 +21,7 @@
 // _like
 // Avoid the use of _t as that makes it seem like a type and not a concept
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <class T, class... U>
    concept is_any_of = (std::same_as<T, U> || ...);
@@ -70,7 +75,7 @@ namespace glz
       std::same_as<std::remove_cvref_t<T>, std::uint8_t>;
 }
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <class T>
    concept char_t = std::same_as<std::remove_cvref_t<T>, char>;
@@ -237,7 +242,7 @@ namespace glz
    };
 }
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <class T>
    concept range = requires(T& t) {
@@ -296,7 +301,7 @@ namespace glz
    }
 }
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <class Buffer>
    concept raw_buffer = std::same_as<std::decay_t<Buffer>, char*> && non_const_buffer<Buffer>;
