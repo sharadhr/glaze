@@ -3,6 +3,12 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/core/buffer_traits.hpp"
 #include "glaze/core/opts.hpp"
 #include "glaze/core/write.hpp"
@@ -10,7 +16,7 @@
 #include "glaze/util/dump.hpp"
 #include "glaze/util/for_each.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <>
    struct serialize<CSV>
