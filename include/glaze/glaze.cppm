@@ -52,6 +52,13 @@ static_assert(false, "Eigen must be included to use glaze/ext/eigen.hpp");
 #else
 static_assert(false, "standalone or boost asio must be included to use glaze/ext/glaze_asio.hpp");
 
+#ifdef _WIN32
+#include <winsock2.h>
+#pragma comment(lib, "ws2_32.lib")
+#else
+#include <unistd.h>
+#endif
+
 export module glaze;
 
 export import std;

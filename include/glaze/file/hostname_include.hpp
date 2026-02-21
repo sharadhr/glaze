@@ -3,11 +3,20 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#define GLAZE_EXPORT_OPEN GLAZE_EXPORT {
+#define GLAZE_EXPORT_CLOSE }
+#else
+#define GLAZE_EXPORT
+#define GLAZE_EXPORT_OPEN
+#define GLAZE_EXPORT_CLOSE
 #ifdef _WIN32
 #include <winsock2.h>
 #pragma comment(lib, "ws2_32.lib")
 #else
 #include <unistd.h>
+#endif
 #endif
 
 #include "glaze/core/common.hpp"
@@ -26,6 +35,7 @@ namespace glz
       };
    }
 
+   GLAZE_EXPORT_OPEN
    template <class T>
    struct meta<detail::hostname_includer<T>>
    {
@@ -135,4 +145,6 @@ namespace glz
       static void op(auto&&...) noexcept
       {}
    };
+
+   GLAZE_EXPORT_CLOSE
 }

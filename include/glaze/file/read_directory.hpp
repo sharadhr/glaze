@@ -3,7 +3,12 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <filesystem>
+#endif
 
 #include "glaze/core/read.hpp"
 #include "glaze/file/file_ops.hpp"
@@ -24,7 +29,7 @@ namespace glz
    }
 
    // files should be a map of std::filesystem::path to std::string buffers
-   [[nodiscard]] inline error_ctx directory_to_buffers(auto& files, const sv directory_path,
+   [[nodiscard]] GLAZE_EXPORT inline error_ctx directory_to_buffers(auto& files, const sv directory_path,
                                                        const sv target_extension = ".json")
    {
       for (const auto& entry : std::filesystem::directory_iterator(directory_path)) {
@@ -37,6 +42,7 @@ namespace glz
       return {};
    }
 
+   GLAZE_EXPORT
    template <auto Opts = opts{}, readable_map_t T>
    [[nodiscard]] error_ctx read_directory(T& value, const sv directory_path, const sv target_extension = ".json")
    {

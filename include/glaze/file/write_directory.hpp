@@ -3,12 +3,17 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <filesystem>
+#endif
 
 #include "glaze/core/write.hpp"
 #include "glaze/file/file_ops.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    [[nodiscard]] inline error_ctx buffers_to_directory(
       const std::unordered_map<std::filesystem::path, std::string>& buffers, const sv directory)

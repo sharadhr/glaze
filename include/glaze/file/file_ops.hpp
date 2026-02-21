@@ -3,9 +3,14 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <cstdio>
 #include <filesystem>
 #include <string>
+#endif
 
 #include "glaze/core/context.hpp"
 
@@ -15,7 +20,7 @@
 #pragma warning(disable : 4996)
 #endif
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <class T>
    [[nodiscard]] error_code file_to_buffer(T& buffer, auto* file, const std::string_view path)

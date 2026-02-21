@@ -3,11 +3,16 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <filesystem>
+#endif
 
 #include "glaze/core/common.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Register this with an object to allow loading a file when a valid file path is given as a string
    // If the file does not exist, the string is handled as a glz::raw_json

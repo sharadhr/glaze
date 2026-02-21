@@ -3,11 +3,16 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <chrono>
 #include <filesystem>
 #include <future>
+#endif
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    struct thread_handler final
    {
