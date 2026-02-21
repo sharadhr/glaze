@@ -2,8 +2,12 @@
 // For the license information refer to glaze.hpp
 
 #pragma once
-
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <utility>
+#endif
 
 #include "glaze/core/common.hpp"
 #include "glaze/core/context.hpp"
@@ -11,7 +15,7 @@
 #include "glaze/tuplet/tuple.hpp"
 #include "glaze/util/string_literal.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // read_constraint allows a user to register a contraint lambda or member function
    // that returns a boolean, which indicates true for success and false for failure

@@ -3,15 +3,20 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <cstdint>
 #include <type_traits>
+#endif
 
 #include "glaze/core/context.hpp"
 #include "glaze/core/optimization_level.hpp"
 #include "glaze/util/inline.hpp"
 #include "glaze/util/type_traits.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Formats
    // Built in formats must be less than 65536

@@ -3,10 +3,16 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/core/context.hpp"
 #include "glaze/core/meta.hpp"
 
-template <>
+GLAZE_EXPORT template <>
 struct glz::meta<glz::error_code>
 {
    static constexpr sv name = "glz::error_code";

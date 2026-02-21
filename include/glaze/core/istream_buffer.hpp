@@ -3,15 +3,20 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <cstddef>
 #include <cstring>
 #include <istream>
 #include <limits>
 #include <vector>
+#endif
 
 #include "glaze/core/buffer_traits.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Concept for byte-oriented input streams
    // Requires read(char*, std::streamsize), gcount(), and eof() methods

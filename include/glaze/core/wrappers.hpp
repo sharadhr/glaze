@@ -3,11 +3,16 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <type_traits>
+#endif
 
 #include "glaze/core/opts.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // treat a value as quoted to avoid double parsing into a value
    template <class T>

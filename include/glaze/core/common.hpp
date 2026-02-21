@@ -2,7 +2,10 @@
 // For the license information refer to glaze.hpp
 
 #pragma once
-
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <array>
 #include <cstddef>
 #include <iterator>
@@ -10,6 +13,7 @@
 #include <string>
 #include <type_traits>
 #include <vector>
+#endif
 
 #include "glaze/concepts/container_concepts.hpp"
 #include "glaze/core/array_apply.hpp"
@@ -29,7 +33,7 @@
 #include "glaze/util/validate.hpp"
 #include "glaze/util/variant.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Unless we can mutate the input buffer we need somewhere to store escaped strings for key lookup, etc.
    // We don't put this in the context because we don't want to continually reallocate.

@@ -3,13 +3,19 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/core/common.hpp"
 
 // Calls a read function after reading and calls a write function before writing.
 // glz::manage is useful for transforming state from a user facing format
 // into a more complex or esoteric internal format.
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // manage_t invokes a function call before reading and after writing from a value
    template <class T, class Member, class From, class To>

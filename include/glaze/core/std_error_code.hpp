@@ -11,11 +11,16 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <system_error>
+#endif
 
 #include "glaze/core/error_category.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    struct glaze_error_category : public std::error_category
    {
@@ -30,9 +35,4 @@ namespace glz
 }
 
 // Make Glaze error_code compatible with std::error_code
-namespace std
-{
-   template <>
-   struct is_error_code_enum<glz::error_code> : true_type
-   {};
-}
+GLAZE_EXPORT template <> struct std::is_error_code_enum<glz::error_code> : std::true_type{};

@@ -3,13 +3,18 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <fstream>
+#endif
 
 #include "glaze/core/buffer_traits.hpp"
 #include "glaze/core/common.hpp"
 #include "glaze/core/opts.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // For writing to a std::string, std::vector<char>, std::deque<char> and the like
    template <auto Opts, class T, output_buffer Buffer>

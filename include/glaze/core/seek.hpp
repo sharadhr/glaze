@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <initializer_list>
+
 #include "glaze/core/custom.hpp"
 #include "glaze/core/read.hpp"
 #include "glaze/core/reflect.hpp"
@@ -63,6 +65,7 @@ namespace glz
       }
    } // namespace detail
 
+   GLAZE_EXPORT {
    template <class T>
    struct seek_op;
 
@@ -419,10 +422,12 @@ namespace glz
          return result;
       }
    }
+   }
 }
 
 namespace glz
 {
+   GLAZE_EXPORT {
    constexpr size_t json_ptr_depth(const auto s)
    {
       size_t count = 0;
@@ -478,6 +483,7 @@ namespace glz
       }
       return arr;
    }
+   }
 
    namespace detail
    {
@@ -532,6 +538,7 @@ namespace glz
       }
    }
 
+   GLAZE_EXPORT {
    constexpr auto json_ptrs(auto&&... args) { return std::array{sv{args}...}; }
 
    // must copy to allow mutation in constexpr context
@@ -668,5 +675,6 @@ namespace glz
             return false;
          }
       }
+   }
    }
 }

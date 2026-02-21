@@ -2,10 +2,14 @@
 // For the license information refer to glaze.hpp
 
 #pragma once
-
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <cstdint>
+#endif
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <class Adapter>
    struct array_apply_t

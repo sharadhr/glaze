@@ -3,12 +3,18 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/core/common.hpp"
 #include "glaze/core/opts.hpp"
 
 // Common behavior for `to` specializations, typically applies for all formats
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <uint32_t Format>
    struct to<Format, hidden>

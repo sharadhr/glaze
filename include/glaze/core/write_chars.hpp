@@ -3,6 +3,10 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <charconv>
 #include <type_traits>
 
@@ -24,6 +28,7 @@
 #include <format>
 #else
 #include <cstdio>
+#endif
 #endif
 
 #include "glaze/concepts/container_concepts.hpp"
@@ -169,7 +174,7 @@ namespace glz
       }
    }
 
-   template <class T>
+   GLAZE_EXPORT template <class T>
    GLZ_ALWAYS_INLINE constexpr auto sized_integer_conversion() noexcept
    {
       if constexpr (std::is_signed_v<T>) {
@@ -198,7 +203,7 @@ namespace glz
    static_assert(std::is_same_v<decltype(sized_integer_conversion<long long>()), int64_t>);
    static_assert(std::is_same_v<decltype(sized_integer_conversion<unsigned long long>()), uint64_t>);
 
-   struct write_chars
+   GLAZE_EXPORT struct write_chars
    {
       template <auto Opts, class B>
       inline static void op(num_t auto&& value, is_context auto&& ctx, B&& b, auto& ix) noexcept

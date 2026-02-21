@@ -3,6 +3,12 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/core/common.hpp"
 #include "glaze/core/wrappers.hpp"
 
@@ -62,19 +68,19 @@ namespace glz
       };
    }
 
-   template <class T>
+   GLAZE_EXPORT template <class T>
    using custom_read_input_t = typename detail::custom_read_input_type<T>::type;
 
    // Concept: type has custom read that takes a numeric input
-   template <class T>
+   GLAZE_EXPORT template <class T>
    concept custom_num_t = has_custom_meta_v<T> && num_t<custom_read_input_t<T>>;
 
    // Concept: type has custom read that takes a string input
-   template <class T>
+   GLAZE_EXPORT template <class T>
    concept custom_str_t = has_custom_meta_v<T> && str_t<custom_read_input_t<T>>;
 
    // Concept: type has custom read that takes a bool input
-   template <class T>
+   GLAZE_EXPORT template <class T>
    concept custom_bool_t = has_custom_meta_v<T> && bool_t<custom_read_input_t<T>>;
 
 } // namespace glz

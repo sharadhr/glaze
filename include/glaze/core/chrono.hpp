@@ -3,10 +3,15 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <chrono>
 #include <type_traits>
+#endif
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Concept for std::chrono::duration types
    template <class T>

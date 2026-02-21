@@ -3,6 +3,13 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#include <initializer_list>
+#endif
+
 #include "glaze/beve/header.hpp"
 #include "glaze/core/common.hpp"
 #include "glaze/core/opts.hpp"
@@ -17,6 +24,7 @@
 
 namespace glz
 {
+   GLAZE_EXPORT {
    // Check if a size_t value exists in an array (used for hash collision detection)
    constexpr bool contains(const size_t* data, const size_t size, const size_t val) noexcept
    {
@@ -146,6 +154,7 @@ namespace glz
 
    template <class T>
    using not_object_key_type = std::bool_constant<not is_object_key_type<T>>;
+   }
 
    namespace detail
    {
@@ -160,6 +169,7 @@ namespace glz
       };
    }
 
+   GLAZE_EXPORT {
    template <class T, size_t I>
    consteval sv get_key_element()
    {
@@ -398,9 +408,10 @@ namespace glz
          return false;
       }
    }();
+   }
 }
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <size_t I, class T>
    constexpr auto key_name_v = [] {
@@ -615,7 +626,7 @@ namespace glz::detail
    }
 }
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <auto Enum>
       requires(std::is_enum_v<decltype(Enum)>)
@@ -632,7 +643,7 @@ namespace glz
    }();
 }
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // ============================================================================
    // Integer key hashing for enum values and integral variant IDs
@@ -1088,13 +1099,11 @@ namespace glz
    }
 }
 
-#include <initializer_list>
-
 #include "glaze/core/common.hpp"
 #include "glaze/reflection/get_name.hpp"
 #include "glaze/reflection/to_tuple.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Use a dummy struct for make_reflectable so that we don't conflict with any user defined constructors
    struct dummy final
@@ -1106,7 +1115,7 @@ namespace glz
    using make_reflectable = std::initializer_list<dummy>;
 }
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // TODO: This is returning the total keys and not the max keys for a particular variant object
    template <class T, size_t N>
@@ -1151,7 +1160,7 @@ namespace glz
    }
 }
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <class T>
    consteval size_t key_index(const std::string_view key)
@@ -1166,7 +1175,7 @@ namespace glz
    }
 }
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    GLZ_ALWAYS_INLINE constexpr uint64_t bitmix(uint64_t h, const uint64_t seed) noexcept
    {
@@ -2955,7 +2964,7 @@ namespace glz
    // ============================================================================
 }
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    [[nodiscard]] inline std::string format_error(const error_code& ec)
    {
@@ -3022,7 +3031,7 @@ namespace glz
    inline constexpr uint64_t round_up_to_nearest_16(const uint64_t value) noexcept { return (value + 15) & ~15ull; }
 }
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // The Callable comes second as ranges::for_each puts the callable at the end
 

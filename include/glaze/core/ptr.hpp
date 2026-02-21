@@ -3,13 +3,19 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/core/opts.hpp"
 #include "glaze/core/read.hpp"
 #include "glaze/core/write.hpp"
 #include "glaze/json/json_ptr.hpp"
 #include "glaze/util/for_each.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Given a JSON pointer path, reads from the buffer into the object
    template <auto Opts, class T, class B>

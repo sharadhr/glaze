@@ -3,12 +3,17 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <cstdint>
 #include <iterator>
 #include <string>
 #include <string_view>
+#endif
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    inline constexpr size_t max_recursive_depth_limit = 256;
 

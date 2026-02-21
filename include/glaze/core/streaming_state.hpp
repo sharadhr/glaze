@@ -3,12 +3,17 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <cstddef>
 #include <type_traits>
+#endif
 
 #include "glaze/core/context.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Type-erased interface for streaming buffer operations.
    // Allows parsers to trigger refill without knowing the concrete buffer type.

@@ -3,7 +3,12 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <span>
+#endif
 
 #include "glaze/api/std/span.hpp"
 #include "glaze/core/buffer_traits.hpp"
@@ -11,7 +16,7 @@
 #include "glaze/core/streaming_state.hpp"
 #include "glaze/util/parse.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <auto Opts, bool Padded = false>
    auto read_iterators(contiguous auto&& buffer) noexcept

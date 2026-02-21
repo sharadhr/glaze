@@ -3,11 +3,16 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <array>
 #include <concepts>
 #include <initializer_list>
 #include <type_traits>
 #include <utility>
+#endif
 
 #include "glaze/reflection/get_name.hpp"
 #include "glaze/reflection/requires_key.hpp"
@@ -21,6 +26,7 @@
 
 namespace glz
 {
+   GLAZE_EXPORT {
    enum struct operation { serialize, parse };
 
    // The meta_context provides compile time data about the serialization context.
@@ -48,6 +54,7 @@ namespace glz
    template <class T>
    struct json_schema
    {};
+   }
 
    namespace detail
    {
@@ -88,6 +95,7 @@ namespace glz
       Flags(T) -> Flags<T>;
    }
 
+   GLAZE_EXPORT {
    template <class T>
    concept local_construct_t = requires { T::glaze::construct; };
 
@@ -138,6 +146,7 @@ namespace glz
    {
       static constexpr glz::tuple<> value{};
    };
+   }
 
    namespace detail
    {
@@ -438,6 +447,7 @@ namespace glz
       }
    }
 
+   GLAZE_EXPORT {
    template <class T>
    inline constexpr decltype(auto) meta_wrapper_v = [] {
       if constexpr (local_meta_t<T>) {
@@ -618,6 +628,7 @@ namespace glz
          return "";
       }
    }();
+   }
 
    namespace detail
    {
@@ -644,6 +655,7 @@ namespace glz
       }
    }
 
+   GLAZE_EXPORT {
    template <is_variant T>
    inline constexpr auto ids_v = [] {
       if constexpr (ided<T>) {
@@ -709,6 +721,7 @@ namespace glz
 
    template <class T>
    concept has_mimic = local_mimic_t<T> || global_mimic_t<T>;
+   }
 
    // Extract the mimic type from T's glz::meta or T::glaze
    namespace detail
@@ -726,6 +739,7 @@ namespace glz
       };
    }
 
+   GLAZE_EXPORT {
    template <has_mimic T>
    using mimic_type = typename detail::mimic_type_impl<T>::type;
 
@@ -734,4 +748,5 @@ namespace glz
    // to indicate that a custom type mimics another type's serialization behavior.
    template <class T, class Target>
    concept mimics = has_mimic<T> && std::same_as<mimic_type<T>, Target>;
+   }
 }

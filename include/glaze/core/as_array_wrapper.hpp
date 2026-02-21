@@ -3,12 +3,18 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/core/opts.hpp"
 #include "glaze/core/read.hpp"
 #include "glaze/core/write.hpp"
 #include "glaze/reflection/to_tuple.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <uint32_t Format, class T>
       requires(is_specialization_v<T, as_array_wrapper>)

@@ -3,16 +3,21 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <array>
 #include <cstddef>
 #include <limits>
 #include <span>
+#endif
 
 #include "glaze/concepts/container_concepts.hpp"
 #include "glaze/core/context.hpp"
 #include "glaze/util/inline.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Primary template for buffer traits
    // Handles resizable buffers (std::string, std::vector<char>, etc.)

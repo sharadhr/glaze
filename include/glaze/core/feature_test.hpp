@@ -3,6 +3,12 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 // Detect constexpr std::string support
 // The old GCC ABI (_GLIBCXX_USE_CXX11_ABI=0) does not have constexpr std::string::size()
 // This affects features like rename_key returning std::string
@@ -12,7 +18,7 @@
 #define GLZ_HAS_CONSTEXPR_STRING 1
 #endif
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Constexpr bool for use in if constexpr or other compile-time contexts
    // Use GLZ_HAS_CONSTEXPR_STRING macro for #if preprocessor guards

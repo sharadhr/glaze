@@ -4,14 +4,19 @@
 #pragma once
 
 #include <cassert>
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <cstddef>
 #include <limits>
 #include <ostream>
 #include <vector>
+#endif
 
 #include "glaze/core/buffer_traits.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    // Concept for byte-oriented output streams
    // Requires write(const char*, std::streamsize) method
