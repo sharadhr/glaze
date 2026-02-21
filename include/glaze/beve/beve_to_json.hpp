@@ -3,10 +3,16 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/beve/header.hpp"
 #include "glaze/json/write.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    namespace detail
    {

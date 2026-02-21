@@ -3,7 +3,12 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <string_view>
+#endif
 
 #include "glaze/beve/header.hpp"
 #include "glaze/beve/read.hpp"
@@ -114,6 +119,7 @@ namespace glz
    // lazy_beve_view - Truly lazy view into BEVE data
    // ============================================================================
 
+   GLAZE_EXPORT {
    /**
     * @brief A truly lazy view into BEVE data.
     *
@@ -1320,5 +1326,5 @@ namespace glz
    {
       return view.template read_into<T>(value);
    }
-
+   }
 } // namespace glz
