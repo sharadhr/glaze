@@ -3,7 +3,12 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <type_traits>
+#endif
 
 #include "glaze/cbor/read.hpp"
 #include "glaze/cbor/write.hpp"
@@ -11,7 +16,7 @@
 #include "glaze/core/opts.hpp"
 #include "glaze/core/wrappers.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <is_opts_wrapper T>
    struct from<CBOR, T>

@@ -3,6 +3,12 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/cbor/header.hpp"
 #include "glaze/cbor/skip.hpp"
 #include "glaze/core/opts.hpp"
@@ -83,6 +89,7 @@ namespace glz
       }
    }
 
+   GLAZE_EXPORT {
    template <>
    struct parse<CBOR>
    {
@@ -2010,5 +2017,6 @@ namespace glz
       }
 
       return read<set_cbor<Opts>()>(value, buffer, ctx);
+   }
    }
 }

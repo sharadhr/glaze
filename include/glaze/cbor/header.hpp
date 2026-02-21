@@ -3,16 +3,21 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
 #include <bit>
 #include <cmath>
 #include <cstdint>
 #include <cstring>
 #include <limits>
+#endif
 
 #include "glaze/core/context.hpp"
 #include "glaze/util/inline.hpp"
 
-namespace glz::cbor
+GLAZE_EXPORT namespace glz::cbor
 {
    // Major types (high 3 bits of initial byte)
    // These define the structural encoding of CBOR data items per RFC 8949.

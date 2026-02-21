@@ -3,6 +3,12 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include "glaze/cbor/header.hpp"
 #include "glaze/core/opts.hpp"
 #include "glaze/json/write.hpp"
@@ -662,7 +668,7 @@ namespace glz
    }
 
    // Convert CBOR buffer directly to JSON without intermediate C++ types
-   template <auto Opts = glz::opts{}, class CBORBuffer, class JSONBuffer>
+   GLAZE_EXPORT template <auto Opts = glz::opts{}, class CBORBuffer, class JSONBuffer>
    [[nodiscard]] inline error_ctx cbor_to_json(const CBORBuffer& cbor, JSONBuffer& out)
    {
       size_t ix{}; // write index
@@ -687,7 +693,7 @@ namespace glz
    }
 
    // Convenience function returning string
-   template <auto Opts = glz::opts{}, class CBORBuffer>
+   GLAZE_EXPORT template <auto Opts = glz::opts{}, class CBORBuffer>
    [[nodiscard]] inline expected<std::string, error_ctx> cbor_to_json(const CBORBuffer& cbor)
    {
       std::string out;
