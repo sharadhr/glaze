@@ -1,8 +1,14 @@
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include <glaze/core/opts.hpp>
 
-namespace glz::eetf
+GLAZE_EXPORT namespace glz::eetf
 {
 
    // layout erlang term

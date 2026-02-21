@@ -1,5 +1,11 @@
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include <ei.h>
 
 #include <array>
@@ -8,7 +14,7 @@
 
 #include "cmp.hpp"
 
-namespace glz::eetf
+GLAZE_EXPORT namespace glz::eetf
 {
    struct tag_atom
    {};

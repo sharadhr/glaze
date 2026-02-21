@@ -1,5 +1,11 @@
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include <glaze/core/wrappers.hpp>
 
 #include "opts.hpp"
@@ -7,7 +13,7 @@
 #include "types.hpp"
 #include "write.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
    template <class T>
    struct atom_as_string_t

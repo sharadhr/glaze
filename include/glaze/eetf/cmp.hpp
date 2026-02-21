@@ -1,5 +1,11 @@
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 namespace glz::eetf
 {
 
@@ -33,10 +39,10 @@ namespace glz::eetf
 
    } // namespace detail
 
-   template <typename T>
+   GLAZE_EXPORT template <typename T>
    using in = detail::in_impl<T>;
 
-   namespace cmp
+   GLAZE_EXPORT namespace cmp
    {
 
       template <template <class> class Op, int... Vs, typename T>

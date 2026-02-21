@@ -1,5 +1,15 @@
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#define GLAZE_EXPORT_OPEN GLAZE_EXPORT {
+#define GLAZE_EXPORT_CLOSE }
+#else
+#define GLAZE_EXPORT
+#define GLAZE_EXPORT_OPEN
+#define GLAZE_EXPORT_CLOSE
+#endif
+
 #include <ei.h>
 
 #include <glaze/concepts/container_concepts.hpp>
@@ -18,7 +28,7 @@ namespace glz
       return;                                 \
    }
 
-   using header_pair = std::pair<std::size_t, std::size_t>;
+   GLAZE_EXPORT using header_pair = std::pair<std::size_t, std::size_t>;
 
    namespace detail
    {
@@ -65,6 +75,7 @@ namespace glz
 
    } // namespace detail
 
+   GLAZE_EXPORT_OPEN
    template <class It>
    [[nodiscard]] GLZ_ALWAYS_INLINE int decode_version(is_context auto&& ctx, It&& it)
    {
@@ -430,5 +441,7 @@ namespace glz
       detail::encode_impl(std::bind(ei_encode_map_header, _1, _2, static_cast<int>(arity)),
                           std::forward<Args>(args)...);
    }
+
+   GLAZE_EXPORT_CLOSE
 
 } // namespace glz

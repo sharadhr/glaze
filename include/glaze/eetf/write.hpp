@@ -1,5 +1,11 @@
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#else
+#define GLAZE_EXPORT
+#endif
+
 #include <glaze/core/buffer_traits.hpp>
 #include <glaze/core/reflect.hpp>
 #include <glaze/core/write.hpp>
@@ -8,7 +14,7 @@
 #include "ei.hpp"
 #include "opts.hpp"
 
-namespace glz
+GLAZE_EXPORT namespace glz
 {
 
    template <>
