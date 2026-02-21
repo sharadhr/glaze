@@ -5,8 +5,12 @@
 
 #if defined(GLAZE_CXX_MODULE)
 #define GLAZE_EXPORT export
+#define GLAZE_EXPORT_OPEN GLAZE_EXPORT {
+#define GLAZE_EXPORT_CLOSE }
 #else
 #define GLAZE_EXPORT
+#define GLAZE_EXPORT_OPEN
+#define GLAZE_EXPORT_CLOSE
 #include <string_view>
 #endif
 
@@ -119,7 +123,7 @@ namespace glz
    // lazy_beve_view - Truly lazy view into BEVE data
    // ============================================================================
 
-   GLAZE_EXPORT {
+   GLAZE_EXPORT_OPEN
    /**
     * @brief A truly lazy view into BEVE data.
     *
@@ -1326,5 +1330,5 @@ namespace glz
    {
       return view.template read_into<T>(value);
    }
-   }
+   GLAZE_EXPORT_CLOSE
 } // namespace glz

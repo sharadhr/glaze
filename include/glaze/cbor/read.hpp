@@ -5,8 +5,12 @@
 
 #if defined(GLAZE_CXX_MODULE)
 #define GLAZE_EXPORT export
+#define GLAZE_EXPORT_OPEN GLAZE_EXPORT {
+#define GLAZE_EXPORT_CLOSE }
 #else
 #define GLAZE_EXPORT
+#define GLAZE_EXPORT_OPEN
+#define GLAZE_EXPORT_CLOSE
 #endif
 
 #include "glaze/cbor/header.hpp"
@@ -89,7 +93,7 @@ namespace glz
       }
    }
 
-   GLAZE_EXPORT {
+   GLAZE_EXPORT_OPEN
    template <>
    struct parse<CBOR>
    {
@@ -2018,5 +2022,5 @@ namespace glz
 
       return read<set_cbor<Opts>()>(value, buffer, ctx);
    }
-   }
+   GLAZE_EXPORT_CLOSE
 }

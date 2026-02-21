@@ -5,8 +5,12 @@
 
 #if defined(GLAZE_CXX_MODULE)
 #define GLAZE_EXPORT export
+#define GLAZE_EXPORT_OPEN GLAZE_EXPORT {
+#define GLAZE_EXPORT_CLOSE }
 #else
 #define GLAZE_EXPORT
+#define GLAZE_EXPORT_OPEN
+#define GLAZE_EXPORT_CLOSE
 #include <initializer_list>
 #endif
 
@@ -24,7 +28,7 @@
 
 namespace glz
 {
-   GLAZE_EXPORT {
+   GLAZE_EXPORT_OPEN
    // Check if a size_t value exists in an array (used for hash collision detection)
    constexpr bool contains(const size_t* data, const size_t size, const size_t val) noexcept
    {
@@ -154,7 +158,8 @@ namespace glz
 
    template <class T>
    using not_object_key_type = std::bool_constant<not is_object_key_type<T>>;
-   }
+
+   GLAZE_EXPORT_CLOSE
 
    namespace detail
    {
@@ -169,7 +174,7 @@ namespace glz
       };
    }
 
-   GLAZE_EXPORT {
+   GLAZE_EXPORT_OPEN
    template <class T, size_t I>
    consteval sv get_key_element()
    {
@@ -408,7 +413,8 @@ namespace glz
          return false;
       }
    }();
-   }
+
+   GLAZE_EXPORT_CLOSE
 }
 
 GLAZE_EXPORT namespace glz

@@ -3,7 +3,16 @@
 
 #pragma once
 
+#if defined(GLAZE_CXX_MODULE)
+#define GLAZE_EXPORT export
+#define GLAZE_EXPORT_OPEN GLAZE_EXPORT {
+#define GLAZE_EXPORT_CLOSE }
+#else
+#define GLAZE_EXPORT
+#define GLAZE_EXPORT_OPEN
+#define GLAZE_EXPORT_CLOSE
 #include <initializer_list>
+#endif
 
 #include "glaze/core/custom.hpp"
 #include "glaze/core/read.hpp"
@@ -65,7 +74,7 @@ namespace glz
       }
    } // namespace detail
 
-   GLAZE_EXPORT {
+   GLAZE_EXPORT_OPEN
    template <class T>
    struct seek_op;
 
@@ -422,12 +431,12 @@ namespace glz
          return result;
       }
    }
-   }
+   GLAZE_EXPORT_CLOSE
 }
 
 namespace glz
 {
-   GLAZE_EXPORT {
+   GLAZE_EXPORT_OPEN
    constexpr size_t json_ptr_depth(const auto s)
    {
       size_t count = 0;
@@ -483,7 +492,7 @@ namespace glz
       }
       return arr;
    }
-   }
+   GLAZE_EXPORT_CLOSE
 
    namespace detail
    {
@@ -538,7 +547,7 @@ namespace glz
       }
    }
 
-   GLAZE_EXPORT {
+   GLAZE_EXPORT_OPEN
    constexpr auto json_ptrs(auto&&... args) { return std::array{sv{args}...}; }
 
    // must copy to allow mutation in constexpr context
@@ -676,5 +685,5 @@ namespace glz
          }
       }
    }
-   }
+   GLAZE_EXPORT_CLOSE
 }

@@ -5,8 +5,12 @@
 
 #if defined(GLAZE_CXX_MODULE)
 #define GLAZE_EXPORT export
+#define GLAZE_EXPORT_OPEN GLAZE_EXPORT {
+#define GLAZE_EXPORT_CLOSE }
 #else
 #define GLAZE_EXPORT
+#define GLAZE_EXPORT_OPEN
+#define GLAZE_EXPORT_CLOSE
 #include <array>
 #include <concepts>
 #include <initializer_list>
@@ -26,7 +30,7 @@
 
 namespace glz
 {
-   GLAZE_EXPORT {
+   GLAZE_EXPORT_OPEN
    enum struct operation { serialize, parse };
 
    // The meta_context provides compile time data about the serialization context.
@@ -54,7 +58,7 @@ namespace glz
    template <class T>
    struct json_schema
    {};
-   }
+   GLAZE_EXPORT_CLOSE
 
    namespace detail
    {
@@ -95,7 +99,7 @@ namespace glz
       Flags(T) -> Flags<T>;
    }
 
-   GLAZE_EXPORT {
+   GLAZE_EXPORT_OPEN
    template <class T>
    concept local_construct_t = requires { T::glaze::construct; };
 
@@ -146,7 +150,7 @@ namespace glz
    {
       static constexpr glz::tuple<> value{};
    };
-   }
+   GLAZE_EXPORT_CLOSE
 
    namespace detail
    {
@@ -447,7 +451,7 @@ namespace glz
       }
    }
 
-   GLAZE_EXPORT {
+   GLAZE_EXPORT_OPEN
    template <class T>
    inline constexpr decltype(auto) meta_wrapper_v = [] {
       if constexpr (local_meta_t<T>) {
@@ -628,7 +632,7 @@ namespace glz
          return "";
       }
    }();
-   }
+   GLAZE_EXPORT_CLOSE
 
    namespace detail
    {
@@ -655,7 +659,7 @@ namespace glz
       }
    }
 
-   GLAZE_EXPORT {
+   GLAZE_EXPORT_OPEN
    template <is_variant T>
    inline constexpr auto ids_v = [] {
       if constexpr (ided<T>) {
@@ -721,7 +725,7 @@ namespace glz
 
    template <class T>
    concept has_mimic = local_mimic_t<T> || global_mimic_t<T>;
-   }
+   GLAZE_EXPORT_CLOSE
 
    // Extract the mimic type from T's glz::meta or T::glaze
    namespace detail
