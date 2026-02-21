@@ -1,3 +1,8 @@
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <charconv>
 #include <deque>
 #include <iostream>
@@ -8,7 +13,7 @@
 #include "glaze/glaze.hpp"
 #include "glaze/util/itoa.hpp"
 #include "glaze/util/itoa_40kb.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

@@ -1,12 +1,15 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
-#include "glaze/net/http_router.hpp"
-
-#include <cassert>
-#include <regex>
-
 #include "ut/ut.hpp"
+#include <cassert>
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
+#include "glaze/net/http_router.hpp"
+#include <regex>
+#endif
 
 using namespace ut;
 

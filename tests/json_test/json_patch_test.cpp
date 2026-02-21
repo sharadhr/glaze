@@ -2,9 +2,13 @@
 // For the license information refer to glaze.hpp
 
 #include <cstdlib>
-
-#include "glaze/json/patch.hpp"
 #include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
+#include "glaze/json/patch.hpp"
+#endif
 
 using namespace ut;
 

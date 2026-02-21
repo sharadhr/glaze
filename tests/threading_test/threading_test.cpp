@@ -1,6 +1,11 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <cstdint>
 #include <random>
 #include <thread>
@@ -9,7 +14,7 @@
 #include "glaze/thread/async_string.hpp"
 #include "glaze/thread/async_vector.hpp"
 #include "glaze/thread/guard.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

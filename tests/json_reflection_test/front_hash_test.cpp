@@ -1,8 +1,13 @@
 // Separated from json_reflection_test.cpp to work around GCC compiler bug
 // with large translation units and DISABLE_ALWAYS_INLINE
 
-#include "glaze/glaze.hpp"
 #include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
+#include "glaze/glaze.hpp"
+#endif
 
 using namespace ut;
 

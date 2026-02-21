@@ -1,3 +1,8 @@
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include "glaze/toml.hpp"
 
 #include <chrono>
@@ -8,8 +13,7 @@
 #include <span>
 #include <string_view>
 #include <unordered_set>
-
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

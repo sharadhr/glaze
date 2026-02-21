@@ -1,3 +1,8 @@
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <deque>
 #include <map>
 #include <optional>
@@ -6,7 +11,7 @@
 
 #include "glaze/core/feature_test.hpp"
 #include "glaze/glaze.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

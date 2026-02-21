@@ -4,11 +4,16 @@
 // Force snprintf fallback by defining this BEFORE including glaze
 #define GLZ_USE_STD_FORMAT_FLOAT 0
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <format>
 #include <numbers>
 
 #include "glaze/glaze.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

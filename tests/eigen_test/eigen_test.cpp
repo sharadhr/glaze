@@ -1,10 +1,15 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
-#include "glaze/ext/eigen.hpp"
-
 #include <Eigen/Core>
 #include <Eigen/Geometry>
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
+#include "glaze/ext/eigen.hpp"
+
 #include <any>
 #include <chrono>
 #include <iostream>
@@ -18,7 +23,7 @@
 #include "glaze/json/ptr.hpp"
 #include "glaze/json/read.hpp"
 #include "glaze/json/write.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

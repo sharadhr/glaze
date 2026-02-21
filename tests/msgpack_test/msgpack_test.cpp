@@ -1,6 +1,11 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include "glaze/msgpack.hpp"
 
 #include <array>
@@ -22,7 +27,7 @@
 #include <vector>
 
 #include "glaze/json/ptr.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

@@ -1,5 +1,8 @@
 // Glaze REST Demo Server
 
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -7,6 +10,7 @@
 #include "glaze/glaze.hpp"
 #include "glaze/net/http_server.hpp"
 #include "glaze/rpc/registry.hpp"
+#endif
 
 struct User
 {

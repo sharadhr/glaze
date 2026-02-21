@@ -1,8 +1,13 @@
 // Tests for linear_search compile-time option
 // This option uses linear key search instead of hash tables for smaller binary size
 
-#include "glaze/glaze.hpp"
 #include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
+#include "glaze/json.hpp"
+#endif
 
 using namespace ut;
 

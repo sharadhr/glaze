@@ -3,12 +3,16 @@
 
 // Complete example showing Glaze HTTP server with WebSocket support
 
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <iostream>
 #include <mutex>
 #include <set>
 
 #include "glaze/net/http_server.hpp"
 #include "glaze/net/websocket_connection.hpp"
+#endif
 
 using namespace glz;
 

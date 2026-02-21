@@ -3,8 +3,12 @@
 
 #include <ut/ut.hpp>
 
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include "glaze/base64/base64.hpp"
 #include "glaze/util/progress_bar.hpp"
+#endif
 
 using namespace ut;
 

@@ -1,9 +1,11 @@
 
 #pragma once
 
+#if !defined(GLAZE_USE_CXX_MODULE)
 #include <string_view>
 
 #include "glaze/json.hpp"
+#endif
 
 enum class Color { Red, Green, Blue };
 

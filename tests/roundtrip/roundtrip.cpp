@@ -3,7 +3,11 @@
 
 #include <ut/ut.hpp>
 
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include "glaze/glaze.hpp"
+#endif
 
 using namespace ut;
 

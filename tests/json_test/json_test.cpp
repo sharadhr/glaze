@@ -1,6 +1,12 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
+#include "json_test_shared_types.hpp"
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <algorithm>
 #include <any>
 #include <array>
@@ -24,6 +30,7 @@
 #endif
 #include <tuple>
 #include <unordered_map>
+#include <unordered_set>
 #include <variant>
 
 #include "glaze/api/impl.hpp"
@@ -37,8 +44,7 @@
 #include "glaze/json/study.hpp"
 #include "glaze/record/recorder.hpp"
 #include "glaze/trace/trace.hpp"
-#include "json_test_shared_types.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 
@@ -3636,7 +3642,7 @@ suite raw_json_whitespace_tests = [] {
    "raw_json_vs_generic_comparison"_test = [] {
       // Test that both raw_json and generic work correctly with formatted content
       std::string input_json = R"({
-                "type": "mytype", 
+                "type": "mytype",
                 "formatted_field": {
                     "nested": {
                         "value": "test"
@@ -5068,9 +5074,6 @@ suite custom_unique_tests = [] {
       expect(*c.x == 5);
    };
 };
-
-#include <set>
-#include <unordered_set>
 
 static_assert(glz::emplaceable<std::set<std::string>>);
 

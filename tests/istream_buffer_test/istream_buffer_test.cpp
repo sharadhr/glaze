@@ -1,6 +1,11 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <chrono>
 #include <condition_variable>
 #include <filesystem>
@@ -14,7 +19,7 @@
 #include "glaze/beve.hpp"
 #include "glaze/core/ostream_buffer.hpp"
 #include "glaze/json.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

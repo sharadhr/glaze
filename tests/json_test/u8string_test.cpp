@@ -1,8 +1,14 @@
 // Unit tests for std::u8string support (both as buffer and value types)
+
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <string>
 
 #include "glaze/glaze.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

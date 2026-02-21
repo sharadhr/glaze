@@ -1,3 +1,8 @@
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <chrono>
 #include <thread>
 
@@ -5,7 +10,7 @@
 #include "glaze/net/http_client.hpp"
 #include "glaze/net/http_server.hpp"
 #include "glaze/rpc/registry.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

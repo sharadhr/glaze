@@ -1,6 +1,11 @@
 // YAML conformance tests generated from https://github.com/yaml/yaml-test-suite.
 // Concrete-struct variant: tests parse behavior into explicit C++ structs.
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <cmath>
 #include <optional>
 #include <string>
@@ -8,7 +13,7 @@
 
 #include "glaze/glaze.hpp"
 #include "glaze/yaml.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 
@@ -784,11 +789,11 @@ top2: &node2
    "5GBF_struct"_test = [] {
       std::string yaml = R"yaml(Folding:
   "Empty line
-   	
+
   as a line feed"
 Chomping: |
   Clipped empty lines
- 
+
 
 )yaml";
       std::string expected_json = R"json({
@@ -832,9 +837,9 @@ tab: "\tstring"
    };
 
    "DC7X_struct"_test = [] {
-      std::string yaml = R"yaml(a: b	
-seq:	
- - a	
+      std::string yaml = R"yaml(a: b
+seq:
+ - a
 c: d	#X
 )yaml";
       std::string expected_json = R"json({
@@ -860,7 +865,7 @@ c: d	#X
    };
 
    "DK95_03_struct"_test = [] {
-      std::string yaml = R"yaml( 	
+      std::string yaml = R"yaml(
 foo: 1
 )yaml";
       std::string expected_json = R"json({
@@ -875,13 +880,13 @@ foo: 1
   # Comments:
 strip: |-
   # text
-  
+
  # Clip
   # comments:
 
 clip: |
   # text
- 
+
  # Keep
   # comments:
 
@@ -947,11 +952,11 @@ baz: jazz
       std::string yaml = R"yaml(---
 a: '
   '
-b: '  
+b: '
   '
 c: "
   "
-d: "  
+d: "
   "
 e: '
 
@@ -1067,7 +1072,7 @@ description:
 
    "DK95_04_struct"_test = [] {
       std::string yaml = R"yaml(foo: 1
-	
+
 bar: 2
 )yaml";
       std::string expected_json = R"json({
@@ -1082,14 +1087,14 @@ bar: 2
       std::string yaml = R"yaml(foo: 1
 
 bar: 2
-    
+
 text: |
   a
-    
+
   b
 
   c
- 
+
   d
 )yaml";
       std::string expected_json = R"json({
@@ -1170,7 +1175,7 @@ b: *:@*!$"<foo>:
 
    "Y79Y_001_struct"_test = [] {
       std::string yaml = R"yaml(foo: |
- 	
+
 bar: 1
 )yaml";
       std::string expected_json = R"json({
@@ -1480,9 +1485,9 @@ key2: &b *a
 
    "5LLU_struct_fail"_test = [] {
       std::string yaml = R"yaml(block scalar: >
- 
-  
-   
+
+
+
  invalid
 )yaml";
       expect_yaml_error_case(yaml);

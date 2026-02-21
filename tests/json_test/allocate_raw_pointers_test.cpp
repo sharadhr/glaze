@@ -4,13 +4,18 @@
 // Comprehensive tests for the allocate_raw_pointers option
 // Tests raw pointer allocation during deserialization across JSON, BEVE, CBOR, and MSGPACK formats
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <map>
 #include <unordered_map>
 #include <vector>
 
 #include "glaze/cbor.hpp" // CBOR not included in glaze.hpp by default
 #include "glaze/glaze.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

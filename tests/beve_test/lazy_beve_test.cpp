@@ -1,8 +1,13 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
-#include "glaze/glaze.hpp"
 #include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
+#include "glaze/glaze.hpp"
+#endif
 
 using namespace ut;
 

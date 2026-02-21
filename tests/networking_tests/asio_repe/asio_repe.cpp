@@ -3,8 +3,9 @@
 
 #include "ut/ut.hpp"
 
-using namespace ut;
-
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <iostream>
 #include <latch>
 #include <numeric>
@@ -12,6 +13,9 @@ using namespace ut;
 
 #include "glaze/ext/glaze_asio.hpp"
 #include "glaze/thread/async_string.hpp"
+#endif
+
+using namespace ut;
 
 // This test code is self-contained and spawns both the server and the client
 

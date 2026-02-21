@@ -1,9 +1,14 @@
+#include <ut/ut.hpp>
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <algorithm>
 #include <cstdint>
 #include <glaze/json.hpp>
 #include <glaze/json/schema.hpp>
 #include <string>
-#include <ut/ut.hpp>
+#endif
 
 using namespace ut;
 

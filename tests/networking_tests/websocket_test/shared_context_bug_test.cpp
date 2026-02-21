@@ -1,9 +1,14 @@
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <atomic>
 #include <thread>
 
 #include "glaze/net/http_server.hpp"
 #include "glaze/net/websocket_client.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 using namespace glz;

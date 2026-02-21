@@ -1,6 +1,11 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include "glaze/cbor.hpp"
 
 #include <bit>
@@ -17,6 +22,7 @@
 #include "glaze/base64/base64.hpp"
 #include "glaze/glaze_exceptions.hpp"
 #include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

@@ -3,6 +3,11 @@
 
 #define UT_RUN_TIME_ONLY
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <array>
 #include <cstdint>
 #include <string>
@@ -11,7 +16,7 @@
 #include "glaze/eetf/wrappers.hpp"
 #include "glaze/eetf/write.hpp"
 #include "glaze/trace/trace.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace glz::eetf;
 

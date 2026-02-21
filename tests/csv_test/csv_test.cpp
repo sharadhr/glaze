@@ -5,6 +5,11 @@
 #pragma GCC diagnostic ignored "-Warray-bounds"
 #endif
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <array>
 #include <cstdint>
 #include <deque>
@@ -17,7 +22,7 @@
 #include "glaze/csv/read.hpp"
 #include "glaze/csv/write.hpp"
 #include "glaze/record/recorder.hpp"
-#include "ut/ut.hpp"
+#endif
 
 // Specification: https://datatracker.ietf.org/doc/html/rfc4180
 
@@ -2343,7 +2348,7 @@ suite csv_2d_array_edge_cases = [] {
    };
 
    "2d_array_whitespace_handling"_test = [] {
-      std::string csv_data = R"( 1 , 2 , 3 
+      std::string csv_data = R"( 1 , 2 , 3
  4 , 5 , 6 )";
 
       std::vector<std::vector<std::string>> matrix;

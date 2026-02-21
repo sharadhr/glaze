@@ -1,13 +1,18 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <fstream>
 #include <iostream>
 
 #include "glaze/glaze.hpp"
 #include "glaze/net/http_server.hpp"
 #include "glaze/rpc/registry.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 
@@ -186,11 +191,11 @@ int main()
       <div class="container">
         <h1>Glaze REST API Demo</h1>
         <p>A simple demonstration of the Glaze REST API functionality.</p>
-        
+
         <h2>All Users</h2>
         <div id="usersList"></div>
         <div id="loading">Loading...</div>
-        
+
         <h2>Get User by ID</h2>
         <div class="form-group">
             <label for="userId">User ID:</label>
@@ -199,7 +204,7 @@ int main()
         <button id="getUser">Get User</button>
         <div id="userResult" class="hidden card"></div>
         <div id="userError" class="error hidden"></div>
-        
+
         <h2>Add New User</h2>
         <div class="form-group">
             <label for="userName">Name:</label>
@@ -213,24 +218,24 @@ int main()
         <div id="addSuccess" class="success hidden">User added successfully!</div>
         <div id="addError" class="error hidden"></div>
       </div>
-      
+
       <script>
         // Fetch all users
         async function fetchUsers() {
             document.getElementById('loading').style.display = 'block';
             document.getElementById('usersList').innerHTML = '';
-            
+
             try {
                 const response = await fetch('/api/getAllUsers');
                 const users = await response.json();
-                
+
                 document.getElementById('loading').style.display = 'none';
-                
+
                 if (users.length === 0) {
                     document.getElementById('usersList').innerHTML = '<p>No users found</p>';
                     return;
                 }
-                
+
                 users.forEach(user => {
                     const userCard = document.createElement('div');
                     userCard.className = 'card';
@@ -246,7 +251,7 @@ int main()
                 document.getElementById('usersList').innerHTML = `<p class="error">Error loading users: ${error.message}</p>`;
             }
         }
-        
+
         // Get user by ID
         document.getElementById('getUser').addEventListener('click', async () => {
             const userId = document.getElementById('userId').value;
@@ -256,7 +261,7 @@ int main()
                 document.getElementById('userResult').classList.add('hidden');
                 return;
             }
-            
+
             try {
                 // Using POST to getUserById with a JSON body
                 const response = await fetch('/api/getUserById', {
@@ -266,9 +271,9 @@ int main()
                     },
                     body: JSON.stringify({ id: parseInt(userId) })
                 });
-                
+
                 const data = await response.json();
-                
+
                 // Check if we got a valid user (has an id)
                 if (!data.id) {
                     document.getElementById('userError').textContent = 'User not found';
@@ -276,7 +281,7 @@ int main()
                     document.getElementById('userResult').classList.add('hidden');
                     return;
                 }
-                
+
                 document.getElementById('userError').classList.add('hidden');
                 document.getElementById('userResult').classList.remove('hidden');
                 document.getElementById('userResult').innerHTML = `
@@ -290,19 +295,19 @@ int main()
                 document.getElementById('userResult').classList.add('hidden');
             }
         });
-        
+
         // Add new user
         document.getElementById('addUser').addEventListener('click', async () => {
             const name = document.getElementById('userName').value;
             const email = document.getElementById('userEmail').value;
-            
+
             if (!name || !email) {
                 document.getElementById('addError').textContent = 'Please fill in all fields';
                 document.getElementById('addError').classList.remove('hidden');
                 document.getElementById('addSuccess').classList.add('hidden');
                 return;
             }
-            
+
             try {
                 // Using createUser endpoint
                 const response = await fetch('/api/createUser', {
@@ -312,14 +317,14 @@ int main()
                     },
                     body: JSON.stringify({ name, email })
                 });
-                
+
                 const data = await response.json();
-                
+
                 document.getElementById('addError').classList.add('hidden');
                 document.getElementById('addSuccess').classList.remove('hidden');
                 document.getElementById('userName').value = '';
                 document.getElementById('userEmail').value = '';
-                
+
                 // Refresh the users list
                 fetchUsers();
             } catch (error) {
@@ -328,7 +333,7 @@ int main()
                 document.getElementById('addSuccess').classList.add('hidden');
             }
         });
-        
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             fetchUsers();

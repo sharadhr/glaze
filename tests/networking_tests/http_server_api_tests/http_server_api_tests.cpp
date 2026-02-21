@@ -4,6 +4,11 @@
 // Unit Tests for Glaze HTTP Async Routes and Server API
 // Tests async route handling, server lifecycle, and advanced routing features
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <atomic>
 #include <chrono>
 #include <future>
@@ -16,7 +21,7 @@
 #include "glaze/net/http_client.hpp"
 #include "glaze/net/http_router.hpp"
 #include "glaze/net/http_server.hpp"
-#include "ut/ut.hpp"
+#endif
 
 #if defined(GLZ_USING_BOOST_ASIO)
 namespace asio

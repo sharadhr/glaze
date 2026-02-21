@@ -1,7 +1,12 @@
 // Tests for skip_null_members_on_read option in BEVE format
 
-#include "glaze/glaze.hpp"
 #include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
+#include "glaze/glaze.hpp"
+#endif
 
 using namespace ut;
 

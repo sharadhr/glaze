@@ -2,6 +2,11 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <array>
 #include <cstdint>
 #include <map>
@@ -16,7 +21,7 @@
 #include "glaze/containers/flat_map.hpp"
 #include "glaze/json.hpp"
 #include "json_test_shared_types.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

@@ -1,7 +1,11 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include "glaze/ext/cli_menu.hpp"
+#endif
 
 struct my_functions
 {

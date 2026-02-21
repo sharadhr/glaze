@@ -2,6 +2,11 @@
 // Tests examples from the Glaze HTTP/REST Documentation
 // See: http-examples.md
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <mutex>
 #include <random>
 #include <set>
@@ -10,7 +15,7 @@
 #include "glaze/net/http_router.hpp"
 #include "glaze/net/http_server.hpp"
 #include "glaze/rpc/registry.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

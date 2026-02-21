@@ -4,6 +4,11 @@
 // Comprehensive tests for simple_float.hpp
 // Tests roundtrip correctness of simple_float implementations
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include "glaze/util/simple_float.hpp"
 
 #include <atomic>
@@ -25,7 +30,7 @@
 #include "glaze/glaze.hpp"
 #include "glaze/util/dtoa.hpp"
 #include "glaze/util/glaze_fast_float.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

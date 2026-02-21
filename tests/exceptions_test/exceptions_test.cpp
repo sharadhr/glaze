@@ -1,13 +1,18 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include "glaze/glaze_exceptions.hpp"
 #include "glaze/thread/async.hpp"
 #include "glaze/thread/async_string.hpp"
 #include "glaze/thread/shared_async_map.hpp"
 #include "glaze/thread/shared_async_vector.hpp"
 #include "glaze/thread/threadpool.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

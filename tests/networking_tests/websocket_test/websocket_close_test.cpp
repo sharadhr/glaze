@@ -3,6 +3,11 @@
 
 // Unit tests for WebSocket close frame and error handling
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <algorithm>
 #include <array>
 #include <atomic>
@@ -17,7 +22,7 @@
 
 #include "glaze/net/http_server.hpp"
 #include "glaze/net/websocket_connection.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 using namespace glz;

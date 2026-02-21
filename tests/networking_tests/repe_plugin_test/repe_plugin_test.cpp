@@ -1,6 +1,11 @@
 // Glaze Library
 // For the license information refer to glaze.hpp
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <atomic>
 #include <mutex>
 #include <thread>
@@ -8,7 +13,7 @@
 
 #include "glaze/rpc/repe/plugin.h"
 #include "glaze/rpc/repe/plugin_helper.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

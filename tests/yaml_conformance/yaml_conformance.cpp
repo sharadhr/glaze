@@ -1,11 +1,16 @@
 // YAML conformance tests generated from https://github.com/yaml/yaml-test-suite.
 // All conformance cases assert expected parser behavior.
 
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <string>
 
 #include "glaze/glaze.hpp"
 #include "glaze/yaml.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 
@@ -403,7 +408,7 @@ top2: &node2
       std::string yaml = R"yaml(--- >
  ab
  cd
- 
+
  ef
 
 
@@ -424,7 +429,7 @@ top2: &node2
 
    // 4RWC: Trailing spaces after flow collection
    "4RWC"_test = [] {
-      std::string yaml = R"yaml(  [1, 2, 3]  
+      std::string yaml = R"yaml(  [1, 2, 3]
   )yaml";
       glz::generic parsed{};
       [[maybe_unused]] auto ec = glz::read_yaml<glz::opts{.error_on_unknown_keys = false}>(parsed, yaml);
@@ -573,11 +578,11 @@ folded: >
    "5GBF"_test = [] {
       std::string yaml = R"yaml(Folding:
   "Empty line
-   	
+
   as a line feed"
 Chomping: |
   Clipped empty lines
- 
+
 
 )yaml";
       glz::generic parsed{};
@@ -819,8 +824,8 @@ bar: 42
    "6WPF"_test = [] {
       std::string yaml = R"yaml(---
 "
-  foo 
- 
+  foo
+
     bar
 
   baz
@@ -870,8 +875,8 @@ null
    "753E"_test = [] {
       std::string yaml = R"yaml(--- |-
  ab
- 
- 
+
+
 ...
 )yaml";
       glz::generic parsed{};
@@ -891,7 +896,7 @@ null
    "7A4E"_test = [] {
       std::string yaml = R"yaml(" 1st non-empty
 
- 2nd non-empty 
+ 2nd non-empty
 	3rd non-empty "
 )yaml";
       glz::generic parsed{};
@@ -980,8 +985,8 @@ key: value
    "93WF"_test = [] {
       std::string yaml = R"yaml(--- >-
   trimmed
-  
- 
+
+
 
   as
   space
@@ -1178,7 +1183,7 @@ double: "text"
       std::string yaml = R"yaml(---
 " 1st non-empty
 
- 2nd non-empty 
+ 2nd non-empty
  3rd non-empty "
 )yaml";
       glz::generic parsed{};
@@ -1446,9 +1451,9 @@ key: "missing closing quote
 
    // DC7X: Various trailing tabs
    "DC7X"_test = [] {
-      std::string yaml = R"yaml(a: b	
-seq:	
- - a	
+      std::string yaml = R"yaml(a: b
+seq:
+ - a
 c: d	#X
 )yaml";
       glz::generic parsed{};
@@ -1472,7 +1477,7 @@ c: d	#X
 
    // DE56_04: Trailing tabs in double quoted
    "DE56_04"_test = [] {
-      std::string yaml = R"yaml("5 trailing	
+      std::string yaml = R"yaml("5 trailing
     tab"
 )yaml";
       glz::generic parsed{};
@@ -1490,7 +1495,7 @@ c: d	#X
 
    // DE56_05: Trailing tabs in double quoted
    "DE56_05"_test = [] {
-      std::string yaml = R"yaml("6 trailing	  
+      std::string yaml = R"yaml("6 trailing
     tab"
 )yaml";
       glz::generic parsed{};
@@ -1560,7 +1565,7 @@ c: d	#X
 
    // DK95_03: Tabs that look like indentation
    "DK95_03"_test = [] {
-      std::string yaml = R"yaml( 	
+      std::string yaml = R"yaml(
 foo: 1
 )yaml";
       glz::generic parsed{};
@@ -1644,13 +1649,13 @@ foo: 1
   # Comments:
 strip: |-
   # text
-  
+
  # Clip
   # comments:
 
 clip: |
   # text
- 
+
  # Keep
   # comments:
 
@@ -2042,7 +2047,7 @@ rbi:
    // JEF9_01: Trailing whitespace in streams
    "JEF9_01"_test = [] {
       std::string yaml = R"yaml(- |+
-   
+
 )yaml";
       glz::generic parsed{};
       [[maybe_unused]] auto ec = glz::read_yaml<glz::opts{.error_on_unknown_keys = false}>(parsed, yaml);
@@ -2187,8 +2192,8 @@ key3: "quoted3"
    "K527"_test = [] {
       std::string yaml = R"yaml(>-
   trimmed
-  
- 
+
+
 
   as
   space
@@ -2500,8 +2505,8 @@ suite yaml_conformance_pass_3 = [] {
    "MYW6"_test = [] {
       std::string yaml = R"yaml(|-
  ab
- 
- 
+
+
 ...
 )yaml";
       glz::generic parsed{};
@@ -2550,11 +2555,11 @@ suite yaml_conformance_pass_3 = [] {
       std::string yaml = R"yaml(---
 a: '
   '
-b: '  
+b: '
   '
 c: "
   "
-d: "  
+d: "
   "
 e: '
 
@@ -2606,9 +2611,9 @@ h: "
 
    // NP9H: Spec Example 7.5. Double Quoted Line Breaks
    "NP9H"_test = [] {
-      std::string yaml = R"yaml("folded 
-to a space,	
- 
+      std::string yaml = R"yaml("folded
+to a space,
+
 to a line feed, or 	\
  \ 	non-content"
 )yaml";
@@ -2687,7 +2692,7 @@ national:
    "PRH3"_test = [] {
       std::string yaml = R"yaml(' 1st non-empty
 
- 2nd non-empty 
+ 2nd non-empty
 	3rd non-empty '
 )yaml";
       glz::generic parsed{};
@@ -2766,9 +2771,9 @@ key3: "quoted3"
    // Q8AD: Spec Example 7.5. Double Quoted Line Breaks [1.3]
    "Q8AD"_test = [] {
       std::string yaml = R"yaml(---
-"folded 
+"folded
 to a space,
- 
+
 to a line feed, or 	\
  \ 	non-content"
 )yaml";
@@ -3018,7 +3023,7 @@ rbi: 147   # Runs Batted In
       std::string yaml = R"yaml(---
 ' 1st non-empty
 
- 2nd non-empty 
+ 2nd non-empty
  3rd non-empty '
 )yaml";
       glz::generic parsed{};
@@ -3059,8 +3064,8 @@ rbi: 147   # Runs Batted In
    // TL85: Spec Example 6.8. Flow Folding
    "TL85"_test = [] {
       std::string yaml = R"yaml("
-  foo 
- 
+  foo
+
   	 bar
 
   baz
@@ -3084,7 +3089,7 @@ rbi: 147   # Runs Batted In
       std::string yaml = R"yaml(>
  ab
  cd
- 
+
  ef
 
 
@@ -3188,7 +3193,7 @@ v
   as a line feed"
 Chomping: |
   Clipped empty lines
- 
+
 
 )yaml";
       glz::generic parsed{};
@@ -3210,7 +3215,7 @@ Chomping: |
    // Y79Y_000: Tabs in various contexts
    "Y79Y_000"_test = [] {
       std::string yaml = R"yaml(foo: |
-	
+
 bar: 1
 )yaml";
       glz::generic parsed{};
@@ -3221,7 +3226,7 @@ bar: 1
    // Y79Y_002: Tabs in various contexts
    "Y79Y_002"_test = [] {
       std::string yaml = R"yaml(- [
-	
+
  foo
  ]
 )yaml";
@@ -3769,8 +3774,8 @@ omitted value:,
       std::string yaml = R"yaml(- |
  detected
 - >
- 
-  
+
+
   # detected
 - |1
   explicit
@@ -3953,9 +3958,9 @@ mapping: !!map
    // 5LLU: Block scalar with wrong indented line after spaces only
    "5LLU"_test = [] {
       std::string yaml = R"yaml(block scalar: >
- 
-  
-   
+
+
+
  invalid
 )yaml";
       glz::generic parsed{};
@@ -4133,8 +4138,8 @@ x: { y: z }in: valid
    "6FWR"_test = [] {
       std::string yaml = R"yaml(--- |+
  ab
- 
-  
+
+
 ...
 )yaml";
       glz::generic parsed{};
@@ -4154,7 +4159,7 @@ x: { y: z }in: valid
    "6HB6"_test = [] {
       std::string yaml = R"yaml(  # Leading comment line spaces are
    # neither content nor indentation.
-    
+
 Not indented:
  By one space: |
     By four
@@ -4655,8 +4660,8 @@ suite yaml_conformance_pass_5 = [] {
    // 8G76: Spec Example 6.10. Comment Lines
    "8G76"_test = [] {
       std::string yaml = R"yaml(  # Comment
-   
-   
+
+
 
 )yaml";
       glz::generic parsed{};
@@ -5060,7 +5065,7 @@ b"
    // 9YRD: Multiline Scalar at Top Level
    "9YRD"_test = [] {
       std::string yaml = R"yaml(a
-b  
+b
   c
 d
 
@@ -5674,7 +5679,7 @@ line3
    // DK95_04: Tabs that look like indentation
    "DK95_04"_test = [] {
       std::string yaml = R"yaml(foo: 1
-	
+
 bar: 2
 )yaml";
       glz::generic parsed{};
@@ -5696,7 +5701,7 @@ bar: 2
    // DK95_05: Tabs that look like indentation
    "DK95_05"_test = [] {
       std::string yaml = R"yaml(foo: 1
- 	
+
 bar: 2
 )yaml";
       glz::generic parsed{};
@@ -5718,7 +5723,7 @@ bar: 2
    // DK95_07: Tabs that look like indentation
    "DK95_07"_test = [] {
       std::string yaml = R"yaml(%YAML 1.2
-	
+
 ---
 )yaml";
       glz::generic parsed{};
@@ -5748,11 +5753,11 @@ bar: 2
    // DWX9: Spec Example 8.8. Literal Content
    "DWX9"_test = [] {
       std::string yaml = R"yaml(|
- 
-  
+
+
   literal
-   
-  
+
+
   text
 
  # Comment
@@ -5838,7 +5843,7 @@ scalar2
    "EX5H"_test = [] {
       std::string yaml = R"yaml(---
 a
-b  
+b
   c
 d
 
@@ -6053,14 +6058,14 @@ fifteen: d
       std::string yaml = R"yaml(foo: 1
 
 bar: 2
-    
+
 text: |
   a
-    
+
   b
 
   c
- 
+
   d
 )yaml";
       glz::generic parsed{};
@@ -6113,7 +6118,7 @@ double: "quoted \' scalar"
    "HS5T"_test = [] {
       std::string yaml = R"yaml(1st non-empty
 
- 2nd non-empty 
+ 2nd non-empty
 	3rd non-empty
 )yaml";
       glz::generic parsed{};
@@ -6537,10 +6542,10 @@ invalid item
    "M29M"_test = [] {
       std::string yaml = R"yaml(a: |
  ab
- 
+
  cd
  ef
- 
+
 
 ...
 )yaml";
@@ -6776,7 +6781,7 @@ document
       std::string yaml = R"yaml(key:
   value
   with
-  	
+
   tabs
 )yaml";
       glz::generic parsed{};
@@ -7017,13 +7022,13 @@ foo: bar
       std::string yaml = R"yaml(- |
  detected
 - >
- 
-  
+
+
   # detected
 - |1
   explicit
 - >
- 	
+
  detected
 )yaml";
       glz::generic parsed{};
@@ -7272,9 +7277,9 @@ Stack:
    // S98Z: Block scalar with more spaces than first content line
    "S98Z"_test = [] {
       std::string yaml = R"yaml(empty block scalar: >
- 
-  
-   
+
+
+
  # comment
 )yaml";
       glz::generic parsed{};
@@ -7379,11 +7384,11 @@ seq:
    // T26H: Spec Example 8.8. Literal Content [1.3]
    "T26H"_test = [] {
       std::string yaml = R"yaml(--- |
- 
-  
+
+
   literal
-   
-  
+
+
   text
 
  # Comment
@@ -7867,7 +7872,7 @@ b: *:@*!$"<foo>:
    "W9L4"_test = [] {
       std::string yaml = R"yaml(---
 block scalar: |
-     
+
   more spaces at the beginning
   are invalid
 )yaml";
@@ -8014,7 +8019,7 @@ key: &an:chor value
    // Y79Y_001: Tabs in various contexts
    "Y79Y_001"_test = [] {
       std::string yaml = R"yaml(foo: |
- 	
+
 bar: 1
 )yaml";
       glz::generic parsed{};

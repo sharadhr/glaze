@@ -1,3 +1,8 @@
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <deque>
 #include <iostream>
 #include <map>
@@ -5,7 +10,7 @@
 #include <unordered_map>
 
 #include "glaze/glaze.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 

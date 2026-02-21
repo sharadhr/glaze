@@ -1,22 +1,10 @@
 // Comprehensive HTTPS Server Test for Glaze Library with Built-in Certificate Generation
 // Tests certificate loading, server startup, connections, and API functionality
 
-#include <atomic>
-#include <chrono>
-#include <cstdio>
-#include <fstream>
-#include <future>
-#include <iostream>
-#include <memory>
-#include <thread>
-
 #ifndef GLZ_ENABLE_SSL
 #define GLZ_ENABLE_SSL
 #endif
 
-#include "glaze/glaze.hpp"
-#include "glaze/net/http_client.hpp"
-#include "glaze/net/http_server.hpp"
 #include "ut/ut.hpp"
 
 // OpenSSL includes for certificate generation
@@ -31,6 +19,23 @@
 
 #ifdef DELETE
 #undef DELETE
+#endif
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
+#include <atomic>
+#include <chrono>
+#include <cstdio>
+#include <fstream>
+#include <future>
+#include <iostream>
+#include <memory>
+#include <thread>
+
+#include "glaze/glaze.hpp"
+#include "glaze/net/http_client.hpp"
+#include "glaze/net/http_server.hpp"
 #endif
 
 #if defined(GLZ_USING_BOOST_ASIO)

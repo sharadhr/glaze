@@ -1,12 +1,17 @@
+#include <ut/ut.hpp>
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <chrono>
 #include <future>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <thread>
-#include <ut/ut.hpp>
 
 #include "glaze/net/http_server.hpp"
+#endif
 
 #if defined(GLZ_USING_BOOST_ASIO)
 namespace asio

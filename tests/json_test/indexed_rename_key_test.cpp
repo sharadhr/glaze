@@ -1,6 +1,10 @@
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include <iostream>
 
 #include "glaze/glaze.hpp"
+#endif
 
 namespace mylib
 {

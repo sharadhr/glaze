@@ -2,20 +2,11 @@
 // Verifies ASIO 1.32+ compatibility for SSL WebSocket client (issue #2164)
 // and WSS server support
 
-#include <atomic>
-#include <chrono>
-#include <fstream>
-#include <iostream>
-#include <thread>
-
 // Enable SSL before including headers
 #ifndef GLZ_ENABLE_SSL
 #define GLZ_ENABLE_SSL
 #endif
 
-#include "glaze/glaze.hpp"
-#include "glaze/net/http_server.hpp"
-#include "glaze/net/websocket_client.hpp"
 #include "ut/ut.hpp"
 
 // OpenSSL includes for certificate generation
@@ -23,6 +14,20 @@
 #include <openssl/pem.h>
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
+#include <atomic>
+#include <chrono>
+#include <fstream>
+#include <iostream>
+#include <thread>
+
+#include "glaze/glaze.hpp"
+#include "glaze/net/http_server.hpp"
+#include "glaze/net/websocket_client.hpp"
+#endif
 
 #ifdef DELETE
 #undef DELETE

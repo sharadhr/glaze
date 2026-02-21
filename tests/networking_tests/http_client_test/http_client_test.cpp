@@ -1,3 +1,8 @@
+#include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
 #include "glaze/net/http_client.hpp"
 
 #include <algorithm>
@@ -15,7 +20,7 @@
 #include "glaze/json/write.hpp"
 #include "glaze/net/http_server.hpp"
 #include "glaze/util/key_transformers.hpp"
-#include "ut/ut.hpp"
+#endif
 
 using namespace ut;
 using namespace glz;

@@ -1,8 +1,13 @@
 // Tests that custom lambdas returning nullable types (unique_ptr, optional, etc.)
 // can be properly skipped when they return null values
 
-#include "glaze/glaze.hpp"
 #include "ut/ut.hpp"
+
+#if defined(GLAZE_USE_CXX_MODULE)
+import glaze;
+#else
+#include "glaze/glaze.hpp"
+#endif
 
 using namespace ut;
 
